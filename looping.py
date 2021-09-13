@@ -18,4 +18,4 @@ for i in range(line):
     star-=1 #shortcut for minus 2
     #change whats in string using operators
 
-print("Thank You! ")
+print("Thank you very much! ")
