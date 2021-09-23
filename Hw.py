@@ -11,7 +11,7 @@ print(b[2:5])
 a = "Hello, World!"
 print(a.upper())
 #String Connection
-c = "Hello"
+c = "Hello "
 d = "World"
 e = c + d
 print(e)
