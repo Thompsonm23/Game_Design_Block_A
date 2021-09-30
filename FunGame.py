@@ -9,13 +9,13 @@ import time
 from typing import Counter
 os.system('cls')
 #This is for random numbers
-randy = random.randint(1, 100)
 
 print("Welcome to the number guessing game. In this game you will have 10 chances to guess a number between 1 and 100")
 time.sleep(2)
 answer = input("Do you want to play a game? ")
 time.sleep(2)
 while ('yes' in answer):
+    randy = random.randint(1, 100)
     Counter = 10
     while Counter < 11:
         print("You have this many chances: ", Counter)
