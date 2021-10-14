@@ -26,7 +26,7 @@ def Menu():#menu is used to select array of words
     print("#                [4]Exit                     #")
     print("#To play the game select 1-3 tp exit select 4#")
     print("##############################################")
-    print("This is a word game that gives you a certain amount of geusses to guess a word related to the topic you chose.")
+    print("This is a word game that gives you a certain amount of geusses to guess a word related to the topic you choose.")
     sel=input("What would you like to do?")
     sel=int(sel)#try and accept
     return sel
@@ -71,7 +71,7 @@ while sel !=4:
             print("You guessed wrong, you have ", turns, " turns left.")
         updateWord(word, guesses)
     if turns <0 :
-        print("You lose")
+        print("You lose, the word was ", word)
         sel=Menu()
     os.system('cls')
     score=10*wordCount+5*turns
@@ -80,19 +80,18 @@ while sel !=4:
         maxScore=score
         textFile = open("score.txt", "w")
         textFile.close()
+        saveScore = (score)
+        name = input('Enter your name. ').title()
+        saveScore = input('You got a new high score. What was the number? ')
+        textFile = open("score.txt", "a")#Opens the score file
+        textFile.write("\n" + name + ' has the high score of ' + saveScore + "\n")
+  
+        print ("\n")
+        textFile = open("score.txt", "r")
+        whole = textFile.read()
+        print (whole)
+        textFile.close()
+        print
     if score < maxScore:
         print("The high score is: ", maxScore)
-        sel=Menu()
-    saveScore = (score)
-    name = input('Enter your name. ').title()
-    saveScore = input('You got a new high score. What was the number? ')
-    textFile = open("score.txt", "a")#Opens the score file
-    textFile.write("\n" + name + ' has the high score of ' + saveScore + "\n")
-  
-    print ("\n")
-    textFile = open("score.txt", "r")
-    whole = textFile.read()
-    print (whole)
-    textFile.close()
-    print
     sel=Menu()
