@@ -3,6 +3,12 @@
 import os
 os.system('cls')
 import random
+def updateWord(word, guesses):
+    for letter in word:
+        if letter in guesses:
+            print(letter, end=' ')
+        else:
+            print('_', end=' ')
 
 def Menu():
     print("##############################################")
@@ -29,32 +35,51 @@ def selWord(sel):
         word= random.choice(Colors)
     return word
  
-answer = input("Do you want to play a game?")
-while 'y' in answer:
-    print("Guess the characters")
-    guesses = ''
-    turns = 3
-    while 'y' in answer:
-        while turns > 0:
-            failed = 0
-            for char in selWord:
-                if char in guesses:
-                    print(char)  
-                else:
-                    print("_")
-                    failed += 1
-            if failed == 0:
-                print("You Win")
-                print("The word is: ", selWord)
-                break
-            guess = input("guess a character:")
-            guesses += guess
+answer = input("What is your name?")
+maxScore=0
+sel= Menu()
+print(sel)
+turns= 0
+while sel !=4:
+    word= selWord(sel)
+    word= word.lower()
+    wordCount=len(word)
+    turns= wordCount+2
+    letCount=0
+    guesses=''
+    score=0
+    updateWord(word, guesses)
 
-            if guess not in selWord:        
-                turns -= 1
-                print("Wrong")
-                print("You have", + turns, 'more guesses')
-                if turns == 0:
-                    print("You Loose")
-        while 'n' in answer:
-            print("thank you for playing")
+    while turns > 0 and letCount<=wordCount:
+        print()
+        newguess= input("give me a letter")
+        newguess= newguess.lower()
+        if newguess in word:
+            guesses+= newguess
+            letCount +=1
+            print("you guessed right!")
+        else:
+            turns-= 1
+            print("You guessed wrong, you have ", turns, " turns left.")
+        updateWord(word, guesses)
+    if turns <0 :
+        print("You lose")
+        sel=Menu()
+    os.system('cls')
+    score=10*wordCount+5*turns
+    print("Your score is ", score)
+    if score> maxScore:
+        maxScore=score
+    saveScore = (score)
+    name = input('Enter your name. ').title()
+    saveScore = input('Enter your score. ')
+    textFile = open("score.txt", "a")
+    textFile.write("\n" + name + ' has a score of ' + saveScore + "\n")
+  
+    print ("\n")
+    textFile = open("score.txt", "r")
+    whole = textFile.read()
+    print (whole)
+    textFile.close()
+    print
+    sel=Menu()
