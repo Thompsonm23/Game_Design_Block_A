@@ -1,18 +1,22 @@
-#Maurice Thompson
-#Word game 
-#10/13/21
-#This is a word guessing game that gives you a score with a scoreboard
+#Word Game
+# Maurice Thompson
+#10/13/2021
+# We are creating a list of words
+# randomly select a word from the list for the user to guess
+# give the user some turns
+# show the word to the user with the characters guessed  
+# play as long as the user has turns or has guessed the word
 import os
 os.system('cls')
 import random
-def updateWord(word, guesses):
+def updateWord(word, guesses):#Function to update letters and spaces/dashes
     for letter in word:
         if letter in guesses:
             print(letter, end=' ')
         else:
             print('_', end=' ')
 
-def Menu():
+def Menu():#menu is used to select array of words
     print("##############################################")
     print("#                   Menu                     #")
     print("#                                            #")
@@ -24,7 +28,7 @@ def Menu():
     print("##############################################")
     print("This is a word game that gives you a certain amount of geusses to guess a word related to the topic you chose.")
     sel=input("What would you like to do?")
-    sel=int(sel)
+    sel=int(sel)#try and accept
     return sel
 Colors = ['blue','red','yellow','green','black','white']
 Fruits = ['banana', 'apple', 'strawberry', 'blue berry', 'pear', 'grape',]
@@ -37,8 +41,9 @@ def selWord(sel):
     if sel == 3:
         word= random.choice(Colors)
     return word
+    #Create file for scoreboard and return to menu or exit game.
  
-answer = input("What is your name?")
+answer = input("Do you want to play a game?")
 maxScore=0
 sel= Menu()
 print(sel)
@@ -47,8 +52,8 @@ while sel !=4:
     word= selWord(sel)
     word= word.lower()
     wordCount=len(word)
-    turns= wordCount+2
-    letCount=0
+    turns= wordCount+2#Depends on word lenght
+    letCount=0#Check if the user ended up guessing the word
     guesses=''
     score=0
     updateWord(word, guesses)
@@ -56,7 +61,7 @@ while sel !=4:
     while turns > 0 and letCount<=wordCount:
         print()
         newguess= input("give me a letter")
-        newguess= newguess.lower()
+        newguess= newguess.lower()#Lower cases code
         if newguess in word:
             guesses+= newguess
             letCount +=1
@@ -73,11 +78,16 @@ while sel !=4:
     print("Your score is ", score)
     if score> maxScore:
         maxScore=score
+        textFile = open("score.txt", "w")
+        textFile.close()
+    if score < maxScore:
+        print("The high score is: ", maxScore)
+        sel=Menu()
     saveScore = (score)
     name = input('Enter your name. ').title()
-    saveScore = input('Enter your score. ')
-    textFile = open("score.txt", "a")
-    textFile.write("\n" + name + ' has a score of ' + saveScore + "\n")
+    saveScore = input('You got a new high score. What was the number? ')
+    textFile = open("score.txt", "a")#Opens the score file
+    textFile.write("\n" + name + ' has the high score of ' + saveScore + "\n")
   
     print ("\n")
     textFile = open("score.txt", "r")
