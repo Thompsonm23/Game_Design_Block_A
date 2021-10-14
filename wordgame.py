@@ -1,5 +1,7 @@
 #Maurice Thompson
-#Word game collum
+#Word game 
+#10/13/21
+#This is a word guessing game that gives you a score with a scoreboard
 import os
 os.system('cls')
 import random
@@ -20,6 +22,7 @@ def Menu():
     print("#                [4]Exit                     #")
     print("#To play the game select 1-3 tp exit select 4#")
     print("##############################################")
+    print("This is a word game that gives you a certain amount of geusses to guess a word related to the topic you chose.")
     sel=input("What would you like to do?")
     sel=int(sel)
     return sel
