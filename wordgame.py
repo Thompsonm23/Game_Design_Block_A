@@ -33,6 +33,12 @@ def Menu():#menu is used to select array of words
 Colors = ['blue','red','yellow','green','black','white']
 Fruits = ['banana', 'apple', 'strawberry', 'blue berry', 'pear', 'grape',]
 Animals = ['dog','cat', 'mouse', 'horse','cow','giraffe','rhino','cheetah','lion']
+def theExit(sel):#This is the exit function
+    if sel ==4:
+        textFile = open('score.txt', 'r')
+        whole = textFile.read()
+        print(whole)
+        textFile.close()
 def selWord(sel):
     if sel == 1:
         word= random.choice(Animals)
@@ -42,65 +48,66 @@ def selWord(sel):
         word= random.choice(Colors)
     return word
     #Create file for scoreboard and return to menu or exit game.
+
+
+
  
 name = input('Enter your name. ').title()
 maxScore=0
 sel= Menu()
 print(sel)
 turns= 0
-if sel == 4:
+while sel ==4:#Exit function
     print("Thank you for playing!")
-    textFile =open('score.txt', 'r')
-    whole = textFile.read()
-    print(whole)
-    textFile.close()
-    sel=Menu()
-def someExit():
-    textFile = open("score.txt", "w")
-    textFile.close()
-    saveScore = (score)
-        
-    saveScore = input('You got a new high score. What was the number? ')
-    textFile = open("score.txt", "a")#Opens the score file
-    textFile.write("\n" + name + ' has the high score of ' + saveScore + "\n")
+    theExit(sel)
+    break
 
-    print ("\n")
-    textFile = open("score.txt", "r")
-    whole = textFile.read()
-    print (whole)
-    textFile.close()
-    print
-    if score < maxScore:
-        print("The high score is: ", maxScore)
 while sel <4:
-        word= selWord(sel)
-        word= word.lower()
-        wordCount=len(word)
-        turns= wordCount+2#Depends on word lenght
-        letCount=0#Check if the user ended up guessing the word
-        guesses=''
-        score=0
-        updateWord(word, guesses)
-while turns > 0 and letCount<=wordCount:  
-    print()
-    newguess= input("give me a letter")
-    newguess= newguess.lower()#Lower cases code
-    if newguess in word:
-        guesses+= newguess
-        letCount +=1
-        print("you guessed right!")
-    else:
-        turns-= 1
-        print("You guessed wrong, you have ", turns, " turns left.")
+    word= selWord(sel)
+    word= word.lower()
+    wordCount=len(word)
+    turns= wordCount+2#Depends on word lenght
+    letCount=0#Check if the user ended up guessing the word
+    guesses=''
+    score=0
     updateWord(word, guesses)
+
+    while turns > 0 and letCount<=wordCount:
+        print()
+        newguess= input("give me a letter")
+        newguess= newguess.lower()#Lower cases code
+        if newguess in word:
+            guesses+= newguess
+            letCount +=1
+            print("you guessed right!")
+        else:
+            turns-= 1
+            print("You guessed wrong, you have ", turns, " turns left.")
+        updateWord(word, guesses)
     if turns <0 :
         print("You lose, the word was ", word)
-    sel=Menu()
+        sel=Menu()
     os.system('cls')
     score=10*wordCount+5*turns
+    print("Your score is ", score)
     if score> maxScore:
         maxScore=score
-    print("Your score is ", score)
+        textFile = open("score.txt", "w")
+        textFile.close()
+        saveScore = (score)
+        name = input('Enter your name. ').title()
+        saveScore = input('You got a new high score. What was the number? ')
+        textFile = open("score.txt", "a")#Opens the score file
+        textFile.write("\n" + name + ' has the high score of ' + saveScore + "\n")
+  
+        print ("\n")
+        textFile = open("score.txt", "r")
+        whole = textFile.read()
+        print (whole)
+        textFile.close()
+        print
+    if score < maxScore:
+        print("The high score is: ", maxScore)
     sel=Menu()
 
         
