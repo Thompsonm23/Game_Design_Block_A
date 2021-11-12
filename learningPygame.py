@@ -47,6 +47,8 @@ pygame.draw.circle(window, colors.get('red'), (xc,yc), radius)
 
 pygame.display.flip()
 run=True
+Jumping=False
+jumpCount=10#Boolean to check for jump
 
 
 
@@ -59,10 +61,21 @@ while run:
         if case.type == pygame.QUIT:
             run=False
     keyPressed = pygame.key.get_pressed()
-    if keyPressed [pygame.K_UP]:
-        rect.y -=speed
-    if keyPressed [pygame.K_DOWN]:#Keys for controlling the square
-        rect.y +=speed
+    if not(Jumping):
+        if keyPressed [pygame.K_UP]:
+            rect.y -=speed
+        if keyPressed [pygame.K_DOWN]:#Keys for controlling the square
+            rect.y +=speed
+        if keyPressed [pygame.K_SPACE]:
+            Jumping=True
+    else:
+        if jumpCount >=-10:
+            if jumpCount < 0:
+                rect.y -= jumpCount* abs(jumpCount)*0.5
+                jumpCount -= 1
+            else:
+                jumpCount =10
+                Jumping=False
     if keyPressed [pygame.K_RIGHT]:
         rect.x +=speed
     if keyPressed [pygame.K_LEFT]:

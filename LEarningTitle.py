@@ -88,27 +88,27 @@ while run:
         if mouse_pressed[0]:
             mouse_position=py.mouse.get_pos()
             if Menu:
+                Menu=False
+                Setting=True
+                WindowSize=False
                 if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=459 and mouse_position[1]<=489:
                     win.fill('black')
                     display_Menu()
-                    Menu=False
-                    Setting=True
-                    WindowSize=False
-            if Setting: 
+            if Setting:
+                Menu==False
+                Setting=True
+                WindowSize=False
                 if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=159 and mouse_position[1]<=185:
-                    Menu==False
-                    Setting=True
-                    WindowSize=False
                     win.fill('black')
                     display_message("Settings")
                     display_SmallFont("Window Size", 50,150)
                     display_Back()
                     py.display.set_caption("Settings")
             if WindowSize:
+                Menu=False
+                Setting=False
+                WindowSize=True
                 if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=159 and mouse_position[1]<=185:  
-                    Menu=False
-                    Setting=False
-                    WindowSize=True
                     win.fill('black')
                     display_message("Window Size")
                     py.display.set_caption("Window Size")
