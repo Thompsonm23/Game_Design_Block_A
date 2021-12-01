@@ -1,5 +1,6 @@
 import pygame as py, os, random, time
 from pygame import display
+import pygame
 from pygame.constants import MOUSEBUTTONDOWN
 
 
@@ -71,12 +72,24 @@ def display_Menu():#Menu Function
 def display_Back():
     display_SmallFont("Back", 50, 450)
 
+def lev1():
+    bg=py.image.load('images\\background.png')
+    win.blit(bg, (0,0))
+    display_Back()
+    py.display.flip()
+    #Add rest of the gae here
+def ins():
+    display_SmallFont("Search around the cave to find gold.", 50,150)
+
+    
 
 run = True
 Menu= True
 Setting = False
 WindowSize= False
 Back= True
+Instructions=True
+Level1=True
 display_Menu()
 while run:
     for eve in py.event.get():
@@ -104,15 +117,34 @@ while run:
                     display_SmallFont("Window Size", 50,150)
                     display_Back()
                     py.display.set_caption("Settings")
+            if Level1:
+                 if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=260 and mouse_position[1]<=285:
+                     lev1()
+                     #Add score system
+            if Back:
+                if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=460 and mouse_position[1]<=485:
+                    win.fill('black')
+                    display_Menu()
+            if Instructions:
+                if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=210 and mouse_position[1]<=235:
+                    win.fill('black')
+                    ins()
+                    display_Back()
+
+
+
+
+            # if Back:
+            #     if mouse_position[0]>
             if WindowSize:
                 Menu=False
                 Setting=False
                 WindowSize=True
-                if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=159 and mouse_position[1]<=185:  
-                    win.fill('black')
-                    display_message("Window Size")
-                    py.display.set_caption("Window Size")
-                    display_SmallFont("1280 x 900", 50,150)
-                    if mouse_position[0]>50 and mouse_position[0]<=175 and mouse_position[1]>=159 and mouse_position[1]<=185:
-                        win=py.display.set_mode((1280,900))
+                # if mouse_position[0]>25 and mouse_position[0]<=50 and mouse_position[1]>=159 and mouse_position[1]<=185:  
+                #     # win.fill('black')
+                    # display_message("Window Size")
+                    # py.display.set_caption("Window Size")
+                    # display_SmallFont("1280 x 900", 50,150)
+                    # if mouse_position[0]>50 and mouse_position[0]<=175 and mouse_position[1]>=159 and mouse_position[1]<=185:
+                    #     win=py.display.set_mode((1280,900))
 py.quit()
