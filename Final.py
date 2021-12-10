@@ -82,6 +82,7 @@ Live1,Live2,Live3=True,True,True#Live count
 coincounter=0
 current_time=0
 jumps=0
+score=jumps-coincounter
 backb=False
 SCORE_FONT = pygame.font.SysFont('comicsans', 80)
 myFile= open('score.txt', 'w')
@@ -165,7 +166,7 @@ def Lev2():#Images for background and platforms for level 2
         win.blit(powerup, (220, 225))
     pygame.display.update()
 def updateFile():#This is used for the high score 
-    f = open('score.txt','r') 
+    f = open('score.txt','r') #Learned this code from https://www.techwithtim.net/tutorials/game-development-with-python/side-scroller-pygame/scoring-end-screen/
     file = f.readlines()
     last = int(file[0]) 
 
@@ -193,10 +194,6 @@ def Winner():#Finish screen once you reach the end
     win.blit(startb, (200,400))
     win.blit(menub, (400,405))
     score=jumps+coincounter#Scoring system
-    if Live2==False:
-        score+=5
-    if Live3==False:
-        score+=5
     myFile= open('score.txt', 'w')
     myFile.write(str(score))
     myFile.close()
