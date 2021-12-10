@@ -7,7 +7,6 @@ import os, time
 myFile= open('score.txt', 'w')
 myFile.write("hello ther, my name is maurice \t what is yours")
 myFile.close()
-
 myFile= open('score.txt', 'w')
 myFile.write("and now we will play a game")
 myFile.close()
